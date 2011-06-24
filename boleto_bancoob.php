@@ -15,15 +15,16 @@
 // +----------------------------------------------------------------------+
 // | Originado do Projeto BBBoletoFree que tiveram colaborações de Daniel |
 // | William Schultz e Leandro Maniezo que por sua vez foi derivado do	  |
-// | PHPBoleto de João Prado Maia e Pablo Martins F. Costa				        |
-// | 														                                   			  |
+// | PHPBoleto de João Prado Maia e Pablo Martins F. Costa                |
+// |                                                                      |
 // | Se vc quer colaborar, nos ajude a desenvolver p/ os demais bancos :-)|
 // | Acesse o site do Projeto BoletoPhp: www.boletophp.com.br             |
 // +----------------------------------------------------------------------+
 
 // +----------------------------------------------------------------------+
 // | Equipe Coordenação Projeto BoletoPhp: <boletophp@boletophp.com.br>   |
-// | Desenvolvimento Boleto Itaú: Glauber Portella                        |
+// | Desenvolvimento Boleto BANCOOB/SICOOB: Marcelo de Souza              |
+// | Ajuste de algumas rotinas: Anderson Nuernberg                        |
 // +----------------------------------------------------------------------+
 
 
@@ -38,8 +39,8 @@ $valor_cobrado = "2950,00"; // Valor - REGRA: Sem pontos na milhar e tanto faz c
 $valor_cobrado = str_replace(",", ".",$valor_cobrado);
 $valor_boleto=number_format($valor_cobrado+$taxa_boleto, 2, ',', '');
 
-$dadosboleto["nosso_numero"] = '12345678';  // Nosso numero - REGRA: Máximo de 8 caracteres!
-$dadosboleto["numero_documento"] = '0123';	// Num do pedido ou nosso numero
+$dadosboleto["nosso_numero"] = "08123456";  // Até 8 digitos, sendo os 2 primeiros o ano atual (Ex.: 08 se for 2008)
+$dadosboleto["numero_documento"] = "27.030195.10";	// Num do pedido ou do documento
 $dadosboleto["data_vencimento"] = $data_venc; // Data de Vencimento do Boleto - REGRA: Formato DD/MM/AAAA
 $dadosboleto["data_documento"] = date("d/m/Y"); // Data de emissão do Boleto
 $dadosboleto["data_processamento"] = date("d/m/Y"); // Data de processamento do boleto (opcional)
@@ -54,29 +55,34 @@ $dadosboleto["endereco2"] = "Cidade - Estado -  CEP: 00000-000";
 $dadosboleto["demonstrativo1"] = "Pagamento de Compra na Loja Nonononono";
 $dadosboleto["demonstrativo2"] = "Mensalidade referente a nonon nonooon nononon<br>Taxa bancária - R$ ".number_format($taxa_boleto, 2, ',', '');
 $dadosboleto["demonstrativo3"] = "BoletoPhp - http://www.boletophp.com.br";
+
+// INSTRUÇÕES PARA O CAIXA
 $dadosboleto["instrucoes1"] = "- Sr. Caixa, cobrar multa de 2% após o vencimento";
 $dadosboleto["instrucoes2"] = "- Receber até 10 dias após o vencimento";
 $dadosboleto["instrucoes3"] = "- Em caso de dúvidas entre em contato conosco: xxxx@xxxx.com.br";
 $dadosboleto["instrucoes4"] = "&nbsp; Emitido pelo sistema Projeto BoletoPhp - www.boletophp.com.br";
 
 // DADOS OPCIONAIS DE ACORDO COM O BANCO OU CLIENTE
-$dadosboleto["quantidade"] = "";
-$dadosboleto["valor_unitario"] = "";
-$dadosboleto["aceite"] = "";		
+$dadosboleto["quantidade"] = "10";
+$dadosboleto["valor_unitario"] = "10";
+$dadosboleto["aceite"] = "N";		
 $dadosboleto["especie"] = "R$";
-$dadosboleto["especie_doc"] = "";
+$dadosboleto["especie_doc"] = "DM";
 
 
 // ---------------------- DADOS FIXOS DE CONFIGURAÇÃO DO SEU BOLETO --------------- //
+// DADOS ESPECIFICOS DO SICOOB
+$dadosboleto["modalidade_cobranca"] = "01";
+$dadosboleto["numero_parcela"] = "001";
 
 
-// DADOS DA SUA CONTA - ITAÚ
-$dadosboleto["agencia"] = "1565"; // Num da agencia, sem digito
-$dadosboleto["conta"] = "13877";	// Num da conta, sem digito
-$dadosboleto["conta_dv"] = "4"; 	// Digito do Num da conta
+// DADOS DA SUA CONTA - BANCO SICOOB
+$dadosboleto["agencia"] = "9999"; // Num da agencia, sem digito
+$dadosboleto["conta"] = "99999"; 	// Num da conta, sem digito
 
-// DADOS PERSONALIZADOS - ITAÚ
-$dadosboleto["carteira"] = "175";  // Código da Carteira: pode ser 175, 174, 104, 109, 178, ou 157
+// DADOS PERSONALIZADOS - SICOOB
+$dadosboleto["convenio"] = "7777777";  // Num do convênio - REGRA: No máximo 7 dígitos
+$dadosboleto["carteira"] = "1";
 
 // SEUS DADOS
 $dadosboleto["identificacao"] = "BoletoPhp - Código Aberto de Sistema de Boletos";
@@ -86,6 +92,6 @@ $dadosboleto["cidade_uf"] = "Cidade / Estado";
 $dadosboleto["cedente"] = "Coloque a Razão Social da sua empresa aqui";
 
 // NÃO ALTERAR!
-include("funcoes/funcoes_itau.php"); 
-include("old/include/layout_itau.php");
+include("funcoes/funcoes_bancoob.php");
+include("old/include/layout_bancoob.php");
 ?>

@@ -834,7 +834,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 		</table>		
     <table cellspacing=0 cellpadding=0 width=666 border=0><TBODY><TR><TD width=666 align=right ><font style="font-size: 10px;">Autentica&ccedil;&atilde;o mec&acirc;nica - Ficha de Compensação</font></TD></tr></tbody></table>
 		<div class="barcode">
-			<p><?php fbarcode($dadosboleto["codigo_barras"]); ?></p>
+			<p><?php print $dadosboleto["codigo_barras"]; ?></p>
 		</div>
 		<div class="cut">
 			<p>Corte na linha pontilhada</p>

@@ -21,10 +21,12 @@
 // | Acesse o site do Projeto BoletoPhp: www.boletophp.com.br             |
 // +----------------------------------------------------------------------+
 
-// +---------------------------------------------------------------------------------+
-// | Equipe Coordenação Projeto BoletoPhp: <boletophp@boletophp.com.br>              |
-// | Desenvolvimento Boleto Banco do Brasil: Daniel William Schultz / Leandro Maniezo|
-// +---------------------------------------------------------------------------------+
+// +----------------------------------------------------------------------+
+// | Equipe Coordenação Projeto BoletoPhp: <boletophp@boletophp.com.br>   |
+// | Desenvolvimento Boleto BANCOOB/SICOOB: Marcelo de Souza              |
+// | Ajuste de algumas rotinas: Anderson Nuernberg                        |
+// +----------------------------------------------------------------------+
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -133,7 +135,7 @@
 #boleto .cut {
 	width: 666px;
 	margin: 0px auto;
-	border-bottom: 1px navy dashed;
+	border-bottom: 1px black dashed;
 }
 
 #boleto .cut p {
@@ -141,7 +143,7 @@
 	padding: 0px;
 	font-family: 'Arial Narrow';
 	font-size: 9px;
-	color: navy;
+	color: black;
 }
 
 table.header {
@@ -149,7 +151,7 @@ table.header {
 	height: 38px;
 	margin-top: 20px;
 	margin-bottom: 10px;
-	border-bottom: 2px navy solid;
+	border-bottom: 2px black solid;
 	
 }
 
@@ -162,16 +164,16 @@ table.header div.field_cod_banco {
 	text-align: center;
 	font-size: 14px;
 	font-weight: bold;
-	color: navy;
-	border-right: 2px solid navy;
-	border-left: 2px solid navy;
+	color: black;
+	border-right: 2px solid black;
+	border-left: 2px solid black;
 }
 
 table.header td.linha_digitavel {
 	width: 464px;
 	text-align: right;
 	font: bold 15px Arial; 
-	color: navy
+	color: black
 }
 
 table.line {
@@ -184,8 +186,8 @@ table.line tr.titulos td {
 	height: 13px;
 	font-family: 'Arial Narrow';
 	font-size: 9px;
-	color: navy;
-	border-left: 5px #ffe000 solid;
+	color: black;
+	border-left: 5px #000000 solid;
 	padding-left: 2px;
 }
 
@@ -193,7 +195,7 @@ table.line tr.campos td {
 	height: 12px;
 	font-size: 10px;
 	color: black;
-	border-left: 5px #ffe000 solid;
+	border-left: 5px #000000 solid;
 	padding-left: 2px;
 }
 
@@ -428,7 +430,6 @@ table.line td.outros_acrescimos2 {
 table.line td.valor_cobrado2 {
 	/* width: 180px; */
 	width: 175px;
-
 	padding-right: 5px;
 	background-color: #ffc ;
 }
@@ -446,7 +447,7 @@ table.line tr.campos td.sacador_avalista {
 }
 
 table.line td.cod_baixa {
-	color: navy;
+	color: black;
 	width: 180px;
 }
 
@@ -464,7 +465,7 @@ div.footer p {
 	padding-left: 525px;
 	font-family: 'Arial Narro';
 	font-size: 9px;
-	color: navy;
+	color: black;
 }
 
 
@@ -507,11 +508,7 @@ div.barcode {
  -->
 		
 		<div id="instr_content">
-			<p>
-				O pagamento deste boleto tamb&eacute;m poder&aacute; ser efetuado 
-				nos terminais de Auto-Atendimento BB.
-			</p>
-			
+
 			<h2>Instru&ccedil;&otilde;es</h2>
 			<ol>
 			<li>
@@ -537,12 +534,11 @@ div.barcode {
 		<div class="cut">
 			<p>Corte na linha pontilhada</p>
 		</div>
-    <table cellspacing=0 cellpadding=0 width=666 border=0><TBODY><TR><TD class=ct width=666><div align=right><b class=cp>Recibo
-do Sacado</b></div></TD></tr></tbody></table>
+    		
 		<table class="header" border=0 cellspacing="0" cellpadding="0">
 		<tbody>
 		<tr>
-			<td width=150><IMG SRC="imagens/logobb.jpg"></td>
+			<td width=150><IMG SRC="imagens/logobancoob.jpg"></td>
 			<td width=50>
         <div class="field_cod_banco"><?php echo $dadosboleto["codigo_banco_com_dv"]?></div>
 			</td>
@@ -582,7 +578,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 		</tr>
 		<tr class="campos">
 			<td class="num_doc"><?php echo $dadosboleto["numero_documento"]?></td>
-			<td class="contrato"><?php echo $dadosboleto["contrato"]?></td>
+			<td class="contrato"></td>
 			<td class="cpf_cei_cnpj"><?php echo $dadosboleto["cpf_cnpj"]?></td>
 			<td class="vencimento"><?php echo $dadosboleto["data_vencimento"]?></td>
 			<td class="valor_doc"><?php echo $dadosboleto["valor_boleto"]?></td>
@@ -635,7 +631,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 		<table class="header" border=0 cellspacing="0" cellpadding="0">
 		<tbody>
 		<tr>
-			<td width=150><IMG SRC="imagens/logobb.jpg"></td>
+			<td width=150><IMG SRC="imagens/logobancoob.jpg"></td>
 			<td width=50>
         <div class="field_cod_banco"><?php echo $dadosboleto["codigo_banco_com_dv"]?></div>
 			</td>
@@ -696,7 +692,7 @@ do Sacado</b></div></TD></tr></tbody></table>
 		<tr class="titulos">
 			<td class="reservado">Uso do  banco</td>
 			<td class="carteira">Carteira</td>
-			<td class="especie2">Espécie</td>
+			<td class="especie2">Esp&eacute;cie</td>
 			<td class="qtd2">Quantidade</td>
 			<td class="xvalor">x Valor</td>
 			<td class="valor_doc2">(=) Valor documento</td>
@@ -832,10 +828,15 @@ do Sacado</b></div></TD></tr></tbody></table>
 		</tr>
 		</tbody>
 		</table>		
-    <table cellspacing=0 cellpadding=0 width=666 border=0><TBODY><TR><TD width=666 align=right ><font style="font-size: 10px;">Autentica&ccedil;&atilde;o mec&acirc;nica - Ficha de Compensação</font></TD></tr></tbody></table>
-		<div class="barcode">
-			<p><?php fbarcode($dadosboleto["codigo_barras"]); ?></p>
+
+		<div class="footer">
+			<p>Autentica&ccedil;&atilde;o mec&acirc;nica</p>
 		</div>
+
+		<div class="barcode">
+			<p><?php print $dadosboleto["codigo_barras"]; ?></p>
+		</div>
+
 		<div class="cut">
 			<p>Corte na linha pontilhada</p>
 		</div>

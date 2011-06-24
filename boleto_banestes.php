@@ -23,7 +23,7 @@
 
 // +----------------------------------------------------------------------+
 // | Equipe Coordenação Projeto BoletoPhp: <boletophp@boletophp.com.br>   |
-// | Desenvolvimento Boleto Itaú: Glauber Portella                        |
+// | Desenvolvimento Boleto Banestes: Fernando José de Oliveira Chagas    |
 // +----------------------------------------------------------------------+
 
 
@@ -38,8 +38,8 @@ $valor_cobrado = "2950,00"; // Valor - REGRA: Sem pontos na milhar e tanto faz c
 $valor_cobrado = str_replace(",", ".",$valor_cobrado);
 $valor_boleto=number_format($valor_cobrado+$taxa_boleto, 2, ',', '');
 
-$dadosboleto["nosso_numero"] = '12345678';  // Nosso numero - REGRA: Máximo de 8 caracteres!
-$dadosboleto["numero_documento"] = '0123';	// Num do pedido ou nosso numero
+$dadosboleto["nosso_numero"] = "21487805";  // Nosso numero sem o DV - REGRA: Máximo de 8 caracteres!
+$dadosboleto["numero_documento"] = "18.030299.01";	// Num do pedido ou do documento
 $dadosboleto["data_vencimento"] = $data_venc; // Data de Vencimento do Boleto - REGRA: Formato DD/MM/AAAA
 $dadosboleto["data_documento"] = date("d/m/Y"); // Data de emissão do Boleto
 $dadosboleto["data_processamento"] = date("d/m/Y"); // Data de processamento do boleto (opcional)
@@ -64,19 +64,21 @@ $dadosboleto["quantidade"] = "";
 $dadosboleto["valor_unitario"] = "";
 $dadosboleto["aceite"] = "";		
 $dadosboleto["especie"] = "R$";
-$dadosboleto["especie_doc"] = "";
+$dadosboleto["especie_doc"] = "DM";
 
 
 // ---------------------- DADOS FIXOS DE CONFIGURAÇÃO DO SEU BOLETO --------------- //
 
 
-// DADOS DA SUA CONTA - ITAÚ
-$dadosboleto["agencia"] = "1565"; // Num da agencia, sem digito
-$dadosboleto["conta"] = "13877";	// Num da conta, sem digito
-$dadosboleto["conta_dv"] = "4"; 	// Digito do Num da conta
+// DADOS DA SUA CONTA - BANESTES
+$dadosboleto["conta"] = "1.222.333"; 	// Num da conta corrente
+$dadosboleto["agencia"] = "123"; 	    // Num da agência
 
-// DADOS PERSONALIZADOS - ITAÚ
-$dadosboleto["carteira"] = "175";  // Código da Carteira: pode ser 175, 174, 104, 109, 178, ou 157
+// DADOS PERSONALIZADOS - BANESTES
+$dadosboleto["carteira"] = "00"; // Carteira do Tipo COBRANÇA SEM REGISTRO (Carteira 00) - Não é Carteira 11
+$dadosboleto["tipo_cobranca"] = "2";  // 2- Sem registro; 
+									  // 3- Caucionada; 
+									  // 4,5,6 e 7-Cobrança com registro
 
 // SEUS DADOS
 $dadosboleto["identificacao"] = "BoletoPhp - Código Aberto de Sistema de Boletos";
@@ -86,6 +88,6 @@ $dadosboleto["cidade_uf"] = "Cidade / Estado";
 $dadosboleto["cedente"] = "Coloque a Razão Social da sua empresa aqui";
 
 // NÃO ALTERAR!
-include("funcoes/funcoes_itau.php"); 
-include("old/include/layout_itau.php");
+include("funcoes/funcoes_banestes.php"); 
+include("old/include/layout_banestes.php");
 ?>
